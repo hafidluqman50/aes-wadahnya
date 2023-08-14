@@ -62,7 +62,7 @@ class DataUsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        $nama_users  = $request->nama_users;
+        $nama_users  = $request->nama_karyawan;
         $username    = $request->username;
         $password    = $request->password;
 
@@ -99,7 +99,7 @@ class DataUsersController extends Controller
         return redirect('/admin/data-users')->with('message','Berhasil Delete Users');
     }
 
-    public function statusPetugas($id) 
+    public function statusUser($id) 
     {
         $users   = User::where('id_users',$id);
         

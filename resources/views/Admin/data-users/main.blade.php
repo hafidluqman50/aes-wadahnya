@@ -55,3 +55,39 @@
 		</div>
 	</section>
 @endsection
+
+
+@section('js')
+<script>
+    $(function(){
+        var users = $('.data-users').DataTable({
+            processing:true,
+            serverSide:true,
+            ajax:"{{ url('/datatables/data-users') }}",
+            columns:[
+                {data:'id_users',searchable:false,render:function(data,type,row,meta){
+                    return meta.row + meta.settings._iDisplayStart+1;
+                }},
+                {data:'name',name:'name'},
+                {data:'username',name:'username'},
+                {data:'status_akun',name:'status_akun'},
+                {data:'action',name:'action',searchable:false,orderable:false}
+            ],
+            scrollCollapse: true,
+            columnDefs: [ {
+            sortable: true,
+            "class": "index",
+            }],
+            scrollX:true,
+            order: [[ 0, 'desc' ]],
+            responsive:true,
+            fixedColumns: true
+        });
+        users.on( 'order.dt search.dt', function () {
+            users.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            });
+        }).draw();
+    });
+</script>
+@endsection

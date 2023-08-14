@@ -1,4 +1,4 @@
-@extends('Admin.layout.layout-app')
+@extends('Karyawan.layout.layout-app')
 
 @section('content')
 	<div class="content-header">
@@ -20,20 +20,15 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-                @if(session()->has('log'))
-                <div class="alert alert-danger alert-dismissible fade show">
-                    {{ session('log') }} <button class="close" data-dismiss="alert">X</button>
-                </div>
-                @endif
 				<div class="card">
 					<div class="card-header">
-						<a href="{{ url('/admin/data-file') }}">
+						<a href="{{ url('/karyawan/data-file') }}">
 							<button class="btn btn-default">
 								<span class="fas fa-arrow-left"></span> Kembali
 							</button>
 						</a>
 					</div>
-					<form action="{{ url('/admin/data-file/dekripsi/proses',$id) }}" method="POST">
+					<form action="{{ url('/karyawan/data-file/dekripsi/proses',$id) }}" method="POST">
 						@csrf
 						@method('PUT')
 						<div class="card-body">

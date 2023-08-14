@@ -21,7 +21,12 @@ class DatatablesController extends Controller
 
     public function dataFile()
     {
-        $data_file = DataFile::with('users')->get();
+        if ($this->level == 'admin') {
+            $data_file = DataFile::with('users')->get();
+        }
+        else {
+            $data_file = DataFile::with('users')->where('id_users',auth()->user()->id_users)->get();   
+        }
 
         $datatables = Datatables::of($data_file)->addColumn('action',function($action){
             $array = [

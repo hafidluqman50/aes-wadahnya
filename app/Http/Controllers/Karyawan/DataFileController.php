@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,18 +13,18 @@ class DataFileController extends Controller
 {
     public function index()
     {
-        $title = 'Admin | Data File';
+        $title = 'Karyawan | Data File';
         $page  = 'data-file';
 
-        return view('Admin.data-file.main',compact('title','page'));
+        return view('Karyawan.data-file.main',compact('title','page'));
     }
 
     public function tambah()
     {
-        $title = 'Admin | Tambah Data File';
+        $title = 'Karyawan | Tambah Data File';
         $page  = 'data-file';
 
-        return view('Admin.data-file.tambah',compact('title','page'));
+        return view('Karyawan.data-file.tambah',compact('title','page'));
     }
 
     public function save(Request $request)
@@ -109,11 +109,11 @@ class DataFileController extends Controller
 
     public function formDekripsi($id)
     {
-        $title = 'Admin | Data File';
+        $title = 'Karyawan | Data File';
         $page  = 'data-file';
         $row   = DataFile::where('id_data_file',$id)->firstOrFail();
 
-        return view('Admin.data-file.form-dekripsi',compact('title','page','row','id'));
+        return view('Karyawan.data-file.form-dekripsi',compact('title','page','row','id'));
     }
 
     public function prosesDekripsi(Request $request, $id)
@@ -199,11 +199,11 @@ class DataFileController extends Controller
 
     public function formEnkripsiUlang($id)
     {
-        $title = 'Admin | Data File';
+        $title = 'Karyawan | Data File';
         $page  = 'data-file';
         $row   = DataFile::where('id_data_file',$id)->firstOrFail();
 
-        return view('Admin.data-file.form-enkripsi-ulang',compact('title','page','row','id'));
+        return view('Karyawan.data-file.form-enkripsi-ulang',compact('title','page','row','id'));
     }
 
     public function prosesEnkripsiUlang(Request $request, $id)

@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DataFileController as AdminDataFileController;
 use App\Http\Controllers\Admin\DataUsersController as AdminDataUsersController;
+
+use App\Http\Controllers\Karyawan\DashboardController as KaryawanDashboardController;
+use App\Http\Controllers\Karyawan\DataFileController as KaryawanDataFileController;
 use App\Http\Controllers\DatatablesController;
 
 /*
@@ -57,6 +60,23 @@ Route::group(['middleware' => 'is.admin','prefix' => 'admin'], function(){
 	Route::get('/data-users/edit/{id}',[AdminDataUsersController::class, 'edit']);
 	Route::put('/data-users/update/{id}',[AdminDataUsersController::class, 'update']);
 	Route::delete('/data-users/delete/{id}',[AdminDataUsersController::class, 'delete']);
-	Route::get('/data-users/status-user/{id}',[AdminDataUsersController::class, 'statusUser']);
+	Route::get('/data-users/status-users/{id}',[AdminDataUsersController::class, 'statusUser']);
 	// END CRUD DATA USERS //
+});
+
+Route::group(['middleware' => 'is.karyawan','prefix' => 'karyawan'], function(){
+    Route::get('/dashboard',[KaryawanDashboardController::class, 'index']);
+
+    // CRUD DATA FILE //
+    Route::get('/data-file',[KaryawanDataFileController::class, 'index']);
+    Route::get('/data-file/tambah',[KaryawanDataFileController::class, 'tambah']);
+    Route::post('/data-file/save',[KaryawanDataFileController::class, 'save']);
+    Route::get('/data-file/dekripsi/{id}',[KaryawanDataFileController::class, 'formDekripsi']);
+    Route::get('/data-file/enkripsi-ulang/{id}',[KaryawanDataFileController::class, 'formEnkripsiUlang']);
+    Route::put('/data-file/dekripsi/proses/{id}',[KaryawanDataFileController::class, 'prosesDekripsi']);
+    Route::put('/data-file/enkripsi-ulang/proses/{id}',[KaryawanDataFileController::class, 'prosesEnkripsiUlang']);
+    Route::get('/data-file/download/{id}',[KaryawanDataFileController::class, 'download']);
+    // Route::get('/data-file/enkripsi/{id}',[KaryawanDataFileController::class, 'prosesEnkripsi']);
+    Route::delete('/data-file/delete/{id}',[KaryawanDataFileController::class, 'delete']);
+    // END CRUD DATA FILE //
 });
