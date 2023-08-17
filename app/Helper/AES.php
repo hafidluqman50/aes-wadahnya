@@ -208,6 +208,7 @@ class AES
 			$this->pos_w = $this->pos_w + $this->Nb;
 		}
 
+        # ROUND 10
 		$this->state = $this->SubByte($this->state);
 
 		$this->state = $this->ShiftRow($this->state);
@@ -326,7 +327,7 @@ class AES
 	{
 
 		$state = [];
-
+        //proses menukar posisi matriks
 		for ($i = 0; $i < 4; $i++) {
 			for ($j = 0; $j < $this->Nb; $j++) {
 
@@ -341,7 +342,7 @@ class AES
 	{
 
 		$state = [];
-
+        // proses perkalian matriks polynominal dan matriks hasil shiftrows
 		for ($i = 0; $i < $this->Nb; $i++) {
 			$state[0][$i] = $this->mult(0x02, $data[0][$i]) ^ $this->mult(0x03, $data[1][$i]) ^ $this->mult(0x01, $data[2][$i]) ^ $this->mult(0x01, $data[3][$i]);
 			$state[1][$i] = $this->mult(0x01, $data[0][$i]) ^ $this->mult(0x02, $data[1][$i]) ^ $this->mult(0x03, $data[2][$i]) ^ $this->mult(0x01, $data[3][$i]);
@@ -356,7 +357,7 @@ class AES
 	{
 
 		$state = $data;
-
+        //melakukan inverse sub bytes berdasarkan inverse s-box
 		for ($i = 0; $i < $this->Nb; $i++) {
 			for ($j = 0; $j < 4; $j++) {
 				$state[$i][$j] = $this->invSub($state[$i][$j]);
@@ -370,7 +371,7 @@ class AES
 	{
 
 		$state = [];
-
+        //melakukan pergeseran terbalik pada matriks
 		for ($i = 0; $i < 4; $i++) {
 			for ($j = 0; $j < $this->Nb; $j++) {
 
@@ -385,7 +386,7 @@ class AES
 	{
 
 		$state = [];
-
+        //melakukan perhitungan perkalian dengan matriks inverse polynominal
 		for ($i = 0; $i < $this->Nb; $i++) {
 			$state[0][$i] = $this->mult(0x0e, $data[0][$i]) ^ $this->mult(0x0b, $data[1][$i]) ^ $this->mult(0x0d, $data[2][$i]) ^ $this->mult(0x09, $data[3][$i]);
 			$state[1][$i] = $this->mult(0x09, $data[0][$i]) ^ $this->mult(0x0e, $data[1][$i]) ^ $this->mult(0x0b, $data[2][$i]) ^ $this->mult(0x0d, $data[3][$i]);

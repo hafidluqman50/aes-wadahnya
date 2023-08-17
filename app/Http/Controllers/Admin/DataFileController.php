@@ -30,6 +30,10 @@ class DataFileController extends Controller
     public function save(Request $request)
     {
         $tanggal_input   = $request->tanggal_input;
+        if (strlen($request->kunci) != 16) {
+            session()->flash('log','Kunci tidak 16 karakter!');
+            return redirect()->back()->withInput($request->input());
+        }
         $kunci           = substr(md5($request->kunci),0,16);
         $keterangan_file = $request->keterangan_file;
         $file            = $request->file;
@@ -118,6 +122,10 @@ class DataFileController extends Controller
 
     public function prosesDekripsi(Request $request, $id)
     {
+        if ($data_file_row->kunci != $kunci) {
+            session()->flash('log','Kunci File Tidak Sama !');
+            return redirect()->back()->withInput($request->input());
+        }
         $kunci         = substr(md5($request->kunci),0,16);
         $data_file_row = DataFile::where('id_data_file',$id)->firstOrFail();
         
